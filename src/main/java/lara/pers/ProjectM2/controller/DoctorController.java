@@ -1,6 +1,6 @@
 package lara.pers.ProjectM2.controller;
 
-import java.net.URI;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lara.pers.ProjectM2.dto.DoctorsDTO;
-import lara.pers.ProjectM2.entity.Doctors;
+
 import lara.pers.ProjectM2.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,19 +47,12 @@ public class DoctorController {
         return service.findAll();
     }
 
-    /*@PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public DoctorsDTO save(@RequestBody DoctorsDTO data){
-        log.info("Guardando registro nuevo en tabla Doctor");
-        return service.save(data);
-    }*/
-
     @PostMapping("/create")
     public ResponseEntity<DoctorsDTO> creaDoctor (@Valid @RequestBody DoctorsDTO doctors){
         
         log.info("Guardando registro nuevo en tabla Doctor");
-       
-        return ResponseEntity.status(201).body(doctors);
+        
+        return ResponseEntity.status(201).body(service.save(doctors));
         
     }   
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lara.pers.ProjectM2.dto.MedicalSpecialityDTO;
 import lara.pers.ProjectM2.service.MedicalSpecialityService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,12 +45,14 @@ public class MedicalSpecialityController {
         return service.findAll();
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public MedicalSpecialityDTO save(@RequestBody MedicalSpecialityDTO data){
-        log.info("Guardando registro nuevo en tabla Medical Speciality");
-        return service.save(data);
-    }
+    @PostMapping("/create")
+    public ResponseEntity<MedicalSpecialityDTO> creaDoctor (@Valid @RequestBody MedicalSpecialityDTO data){
+        
+        log.info("Guardando registro nuevo en tabla Doctor");
+        
+        return ResponseEntity.status(201).body(service.save(data));
+        
+    } 
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

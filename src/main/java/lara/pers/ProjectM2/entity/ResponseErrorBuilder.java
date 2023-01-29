@@ -47,6 +47,8 @@ public class ResponseErrorBuilder {
 
     }
 
+
+
     public ResponseErrorBuilder ruta(String ruta){
         this.ruta = ruta;
         return this;
