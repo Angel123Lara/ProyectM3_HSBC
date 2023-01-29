@@ -7,17 +7,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import lara.pers.ProjectM2.dto.UsuarioDTO;
-import lara.pers.ProjectM2.service.ClienteService;
+
+import lara.pers.ProjectM2.entity.Usuario;
+
+import lara.pers.ProjectM2.repository.UsuarioRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private ClienteService service;
+    private UsuarioRepository service;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UsuarioDTO usuario = service.findOneByEmail(username)
+        Usuario usuario = service.findOneByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("El correo no se encontró"));
         return new UserDetailsImpl(usuario);
     }
