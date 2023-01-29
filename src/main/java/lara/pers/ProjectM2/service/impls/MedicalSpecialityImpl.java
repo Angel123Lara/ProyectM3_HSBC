@@ -52,11 +52,11 @@ public class MedicalSpecialityImpl implements MedicalSpecialityService {
           throw new Exception("We can't found the MedicalSpecility");
         }
     
-        MedicalSpeciality hospital = result.get();
+        MedicalSpeciality medicalSpeciality = result.get();
     
-        hospital.setName(data.getName());
+        medicalSpeciality.setName(data.getName());
         log.info("metodo update() realizado con exito en MedicalSpecialityImpl");
-        repository.save(hospital);
+        repository.save(medicalSpeciality);
       }
     
       public void delete(long id) throws Exception {

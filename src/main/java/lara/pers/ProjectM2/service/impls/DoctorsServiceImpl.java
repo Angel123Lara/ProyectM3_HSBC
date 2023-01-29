@@ -56,11 +56,11 @@ public class DoctorsServiceImpl implements DoctorService {
           throw new Exception("We can't found the Doctor");
         }
     
-        Doctors hospital = result.get();
+        Doctors doctor = result.get();
         
-        hospital.setName(data.getName());
+        doctor.setName(data.getName());
         log.info("metodo update() realizado con exito en DoctorsServiceImpl");
-        repository.save(hospital);
+        repository.save(doctor);
       }
     
       public void delete(long id) throws Exception {

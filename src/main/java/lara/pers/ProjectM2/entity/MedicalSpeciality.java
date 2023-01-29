@@ -4,16 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-
-
 import lombok.Data;
-
 import jakarta.persistence.Table;
-
-
-
-
 import jakarta.persistence.Column;
 
 
@@ -28,13 +20,12 @@ public class MedicalSpeciality {
 
     @Column(name="name", nullable = false)
     private String name;
-
+   
     @Column(name ="info", nullable = false)
     private String info;
 
     @Column(name = "Schedule")
     private String schedule;
 
-    // agrega aqui join con tabla de doctores
    
 }

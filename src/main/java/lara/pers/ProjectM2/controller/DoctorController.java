@@ -1,9 +1,11 @@
 package lara.pers.ProjectM2.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lara.pers.ProjectM2.dto.DoctorsDTO;
+import lara.pers.ProjectM2.entity.Doctors;
 import lara.pers.ProjectM2.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,12 +47,21 @@ public class DoctorController {
         return service.findAll();
     }
 
-    @PostMapping
+    /*@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DoctorsDTO save(@RequestBody DoctorsDTO data){
         log.info("Guardando registro nuevo en tabla Doctor");
         return service.save(data);
-    }
+    }*/
+
+    @PostMapping("/create")
+    public ResponseEntity<DoctorsDTO> creaDoctor (@Valid @RequestBody DoctorsDTO doctors){
+        
+        log.info("Guardando registro nuevo en tabla Doctor");
+       
+        return ResponseEntity.status(201).body(doctors);
+        
+    }   
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

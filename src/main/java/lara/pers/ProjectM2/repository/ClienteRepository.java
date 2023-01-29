@@ -1,12 +1,10 @@
 package lara.pers.ProjectM2.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.stereotype.Repository;
-
-import lara.pers.ProjectM2.entity.Doctors;
+import lara.pers.ProjectM2.entity.Cliente;
 
 @Repository
-public interface DoctorsRepository extends JpaRepository<Doctors, Long> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     
 }

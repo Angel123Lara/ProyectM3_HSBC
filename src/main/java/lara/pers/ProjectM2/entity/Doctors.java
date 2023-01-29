@@ -1,18 +1,13 @@
 package lara.pers.ProjectM2.entity;
 
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
 import jakarta.persistence.Table;
+
 
 import lombok.Data;
 
@@ -26,14 +21,9 @@ public class Doctors {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "PL",nullable = false)
-    private  long PL;
-
-    //agregar aqui relacion con la tabla de especialidad
-
-    @ManyToOne
-    @JoinColumn(name = "Speciality",referencedColumnName = "id")
-    private MedicalSpeciality medicalSpeciality;
     
+    @Column(name = "cedula", nullable = false)
+    private  String cedula;
+
+
 }
