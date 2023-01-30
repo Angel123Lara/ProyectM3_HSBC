@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authorization.AuthorizationManager;
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,8 +33,8 @@ public class WebSecurityConfig {
 
         return http
                 .csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/h2/**")
+                .authorizeHttpRequests()
+                .requestMatchers("/Home","/doctors/all","/doctors","/hospitals","/hospitals/all","/MedicalSpeciality","/MedicalSpeciality/all")
                 .anonymous()
                 .anyRequest()
                 .authenticated()
