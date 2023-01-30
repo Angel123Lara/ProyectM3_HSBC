@@ -98,6 +98,8 @@
 			<version>7.7.0</version>
 			<scope>test</scope>
 		</dependency>
+		
+
 	
 
  </dependencies>
@@ -115,6 +117,7 @@
 						</exclude>
 					</excludes>
 				</configuration>
+				
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -124,6 +127,19 @@
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>3.0.0-M7</version>
 			</plugin>
+			<plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <appsDirectory>apps</appsDirectory>
+                    <installAppPackages>spring-boot-project</installAppPackages>
+                </configuration>
+            </plugin>
+
+
+
+
 		</plugins>
 	</build>
 
