@@ -38,9 +38,10 @@ public class DoctorsServiceImpl implements DoctorService {
     }
 
     public Optional<DoctorsDTO> findById(long id){
-        
-        return null;
-    }
+      
+      return null;
+  }
+
 
     public DoctorsDTO save(DoctorsDTO data){
         Doctors entity = mapper.toEntity(data);
@@ -54,13 +55,16 @@ public class DoctorsServiceImpl implements DoctorService {
         if (result.isEmpty()) {
           log.warn("Result vacio en findById en DoctorsServiceImpl");
           throw new Exception("We can't found the Doctor");
+          
         }
     
         Doctors doctor = result.get();
         
         doctor.setName(data.getName());
+        doctor.setCedula(data.getCedula());
         log.info("metodo update() realizado con exito en DoctorsServiceImpl");
         repository.save(doctor);
+  
       }
     
       public void delete(long id) throws Exception {

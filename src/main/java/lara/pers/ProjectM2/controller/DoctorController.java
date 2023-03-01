@@ -2,10 +2,12 @@ package lara.pers.ProjectM2.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/doctors")
 public class DoctorController {
 
@@ -38,7 +41,7 @@ public class DoctorController {
     @GetMapping
     public String start(){
         log.info("Acceso a pagina principal del Doctor Directory");
-        return "This is the Doctor directory";
+        return "Directorio de Doctores";
     }
 
     @GetMapping("/all")
@@ -47,6 +50,7 @@ public class DoctorController {
         return service.findAll();
     }
 
+   
     @PostMapping("/create")
     public ResponseEntity<DoctorsDTO> creaDoctor (@Valid @RequestBody DoctorsDTO doctors){
         
@@ -58,7 +62,7 @@ public class DoctorController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable("id") long id, @RequestBody DoctorsDTO data) throws Exception {
+    public void update(@PathVariable("id") long id, @Valid @RequestBody DoctorsDTO data) throws Exception {
         log.info("Actualizando registro" + id + "en Tabla Doctor");
         service.update(id, data);
     }

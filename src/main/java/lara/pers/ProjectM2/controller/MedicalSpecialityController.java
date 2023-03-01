@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import lara.pers.ProjectM2.service.MedicalSpecialityService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/MedicalSpeciality")
 public class MedicalSpecialityController {
@@ -36,7 +38,7 @@ public class MedicalSpecialityController {
     @GetMapping
     public String start(){
         log.info("Acceso a pagina principal del Medical Speciality Directory");
-        return "This is the Medical Speciality directory";
+        return "Directorio de Especialidades";
     }
 
     @GetMapping("/all")

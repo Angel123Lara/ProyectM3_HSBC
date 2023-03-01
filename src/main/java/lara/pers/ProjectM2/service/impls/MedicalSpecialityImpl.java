@@ -35,6 +35,7 @@ public class MedicalSpecialityImpl implements MedicalSpecialityService {
     }
 
     public Optional<MedicalSpecialityDTO> findById(long id){
+        
         return null;
     }
 
@@ -55,6 +56,8 @@ public class MedicalSpecialityImpl implements MedicalSpecialityService {
         MedicalSpeciality medicalSpeciality = result.get();
     
         medicalSpeciality.setName(data.getName());
+        medicalSpeciality.setInfo(data.getInfo());
+        medicalSpeciality.setSchedule(data.getSchedule());
         log.info("metodo update() realizado con exito en MedicalSpecialityImpl");
         repository.save(medicalSpeciality);
       }

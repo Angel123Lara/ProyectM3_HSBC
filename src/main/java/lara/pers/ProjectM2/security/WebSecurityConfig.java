@@ -32,12 +32,14 @@ public class WebSecurityConfig {
         jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
         return http
+                .cors()
+                .and()                
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/Home","/doctors/all","/doctors","/hospitals","/hospitals/all","/MedicalSpeciality","/MedicalSpeciality/all")
+                .requestMatchers("/login","/doctors","/doctors/all","/hospitals","/hospitals/all","/MedicalSpeciality","/MedicalSpeciality/all")
                 .anonymous()
                 .anyRequest()
-                .authenticated()
+                .authenticated()       
                 .and()
                 .httpBasic()
                 .and()

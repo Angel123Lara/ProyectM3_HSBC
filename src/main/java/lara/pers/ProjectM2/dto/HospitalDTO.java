@@ -25,8 +25,8 @@ public class HospitalDTO {
     @Pattern(regexp = "[1-9]{1}[0-9]{9}", message = "the phone must be a valid number phone")
     @NotEmpty(message = "The hospital must have an phone")
     @NotNull(message = "The phone hospital not must be null")    
-    @Min(1000000000)
-    @Max(9999999999L)
+    //@Size(min = 1000000000, max = 9999999999L, message = "The number phone must be 10 digits")
+    
     private String phone;
     
 }

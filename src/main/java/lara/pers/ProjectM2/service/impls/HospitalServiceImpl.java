@@ -54,6 +54,8 @@ public class HospitalServiceImpl implements HospitalService {
         Hospital hospital = result.get();
     
         hospital.setName(data.getName());
+        hospital.setAddress(data.getAddress());
+        hospital.setPhone(data.getPhone());
         log.info("metodo update() realizado con exito en HospitalServiceImpl");
         repository.save(hospital);
       }
