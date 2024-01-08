@@ -1,12 +1,14 @@
 package lara.pers.ProjectM2.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import java.util.List;
+
+import lara.pers.ProjectM2.dto.DoctorOnEntityDTO;
+import lara.pers.ProjectM2.dto.HospitalSimpleGetDTO;
 import lombok.Data;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import lombok.ToString;
 
 
 @Data
@@ -18,14 +20,27 @@ public class MedicalSpeciality {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="name", nullable = false)
+    @Column(name="name", unique = true)
     private String name;
    
-    @Column(name ="info", nullable = false)
+    @Column(name ="info")
     private String info;
 
     @Column(name = "Schedule")
     private String schedule;
 
+    @OneToMany(mappedBy = "medicalSpeciality")
+    private List<Doctor> doctor;
+
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JoinTable(
+            name = "medical_speciality_hospital",
+            joinColumns = @JoinColumn(name = "medical_speciality_name"),
+            inverseJoinColumns = @JoinColumn(name = "hospital_name"))
+    private List<Hospital> hospital;
+    //@ManyToMany(fetch = FetchType.LAZY,mappedBy = "medicalSpecialities")
+    //private List<Hospital> hospital;
    
 }

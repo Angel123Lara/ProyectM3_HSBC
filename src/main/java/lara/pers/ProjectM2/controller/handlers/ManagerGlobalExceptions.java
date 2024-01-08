@@ -13,14 +13,34 @@ import lara.pers.ProjectM2.entity.ResponseError;
 public class ManagerGlobalExceptions {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleStatusException (MethodArgumentNotValidException ex,
-                                                    WebRequest request){
+                                                    WebRequest request) {
         return ResponseError.builder()
                 .exceptions(ex)
                 .ruta(request.getDescription(false).substring(4))
                 .entity();
-                                                    }
+    }
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<?> handleCustomException(CustomException exDup,
+                                                   WebRequest request) {
+        return ResponseError.builder()
+                .exceptions(exDup)
+                .ruta(request.getDescription(false).substring(4))
+                .entity();
+
+    }
+
+    @ExceptionHandler(DbException.class)
+    public ResponseEntity<?> handleCustomException(DbException exDB,
+                                                   WebRequest request) {
+        return ResponseError.builder()
+                .exceptions(exDB)
+                .ruta(request.getDescription(false).substring(4))
+                .entity();
+
+    }
+}
 
 
    
 
-}
+

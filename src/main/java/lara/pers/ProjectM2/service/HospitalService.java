@@ -3,16 +3,17 @@ package lara.pers.ProjectM2.service;
 import java.util.List;
 import java.util.Optional;
 
-import lara.pers.ProjectM2.dto.HospitalDTO;
+import lara.pers.ProjectM2.dto.*;
+import lara.pers.ProjectM2.entity.Doctor;
+import lara.pers.ProjectM2.entity.Hospital;
 
 public interface HospitalService {
     List<HospitalDTO> findAll();
 
-    Optional<HospitalDTO> findById(long id);
+    HospitalDTO save(HospitalCreateDTO data) throws Exception;
 
-    HospitalDTO save(HospitalDTO data);
-
-    void update(long id, HospitalDTO data) throws Exception;
+    HospitalDTO findByName(String name) throws Exception;
+    void update(long id, HospitalCreateDTO data) throws Exception;
 
     void delete(long id) throws Exception;
 }

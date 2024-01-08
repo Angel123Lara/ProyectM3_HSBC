@@ -1,7 +1,10 @@
 package lara.pers.ProjectM2.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import lara.pers.ProjectM2.dto.MedSpecialCreateDTO;
+import lara.pers.ProjectM2.entity.MedicalSpeciality;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,13 +51,18 @@ public class MedicalSpecialityController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<MedicalSpecialityDTO> creaDoctor (@Valid @RequestBody MedicalSpecialityDTO data){
+    public ResponseEntity<MedicalSpecialityDTO> creaDoctor (@Valid @RequestBody MedSpecialCreateDTO data){
         
         log.info("Guardando registro nuevo en tabla Doctor");
         
         return ResponseEntity.status(201).body(service.save(data));
         
-    } 
+    }
+    @GetMapping("/{name}")
+    public MedicalSpecialityDTO findName(@PathVariable("name") String name){
+        log.info("Buscando el registro MedSpecial:" + name);
+        return service.findByName(name);
+    }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

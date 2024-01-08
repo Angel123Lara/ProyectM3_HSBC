@@ -3,6 +3,7 @@ package lara.pers.ProjectM2.service.impls;
 import java.util.List;
 import java.util.Optional;
 
+import lara.pers.ProjectM2.dto.MedSpecialCreateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +35,17 @@ public class MedicalSpecialityImpl implements MedicalSpecialityService {
         return medicalSpeciality.stream().map(mapper::toDTO).toList(); 
     }
 
+    public MedicalSpecialityDTO findByName(String name){
+        Optional<MedicalSpeciality> result = repository.findByName(name);
+        return mapper.toDTO(result.get());
+    }
+
     public Optional<MedicalSpecialityDTO> findById(long id){
         
         return null;
     }
 
-    public MedicalSpecialityDTO save(MedicalSpecialityDTO data){
+    public MedicalSpecialityDTO save(MedSpecialCreateDTO data){
         MedicalSpeciality entity = mapper.toEntity(data);
         log.info("metodo save() realizado con exito en MedicalSpecialityImpl");
         return mapper.toDTO(repository.save(entity));

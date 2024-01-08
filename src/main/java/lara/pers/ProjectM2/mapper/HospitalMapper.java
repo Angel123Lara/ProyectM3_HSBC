@@ -1,5 +1,6 @@
 package lara.pers.ProjectM2.mapper;
 
+import lara.pers.ProjectM2.dto.HospitalCreateDTO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 
@@ -10,4 +11,10 @@ import lara.pers.ProjectM2.entity.Hospital;
 public interface HospitalMapper {
     HospitalDTO toDTO(Hospital data);
     Hospital toEntity(HospitalDTO data);
+
+    Hospital toEntityToBD(HospitalCreateDTO data);
+
+    HospitalDTO toDTOFromBD(Hospital data);
+
+
 }

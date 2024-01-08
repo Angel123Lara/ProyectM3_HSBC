@@ -3,6 +3,8 @@ package lara.pers.ProjectM2.entity;
 import java.util.HashMap;
 import java.util.Map;
 
+import lara.pers.ProjectM2.controller.handlers.CustomException;
+import lara.pers.ProjectM2.controller.handlers.DbException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +49,37 @@ public class ResponseErrorBuilder {
 
     }
 
+    //New exception Custom
+    public ResponseErrorBuilder exceptions(CustomException ex) {
+        HttpStatus status = HttpStatus.CONFLICT;
+        this.status = status.value();
+        this.errors = new HashMap<>();
 
+        // Obtén la información de la excepción personalizada
+        String fieldName = ex.getFieldName();
+        String errorMessage = ex.getMessage();
+
+        // Agrega la información al mapa de errores
+        errors.put(fieldName, errorMessage);
+
+        return this;
+    }
+
+    //New exception Custom for DBException
+    public ResponseErrorBuilder exceptions(DbException ex) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        this.status = status.value();
+        this.errors = new HashMap<>();
+
+        // Obtén la información de la excepción personalizada
+        String fieldName = ex.getFieldName();
+        String errorMessage = ex.getMessage();
+
+        // Agrega la información al mapa de errores
+        errors.put(fieldName, errorMessage);
+
+        return this;
+    }
 
     public ResponseErrorBuilder ruta(String ruta){
         this.ruta = ruta;

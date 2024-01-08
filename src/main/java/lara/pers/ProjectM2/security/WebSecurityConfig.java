@@ -36,7 +36,9 @@ public class WebSecurityConfig {
                 .and()                
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/login","/doctors","/doctors/all","/hospitals","/hospitals/all","/MedicalSpeciality","/MedicalSpeciality/all")
+                .requestMatchers("/**")
+                //.requestMatchers("/login","/doctors","/doctors/all","/hospitals","/hospitals/all","/MedicalSpeciality","/MedicalSpeciality/all")
+
                 .anonymous()
                 .anyRequest()
                 .authenticated()       
@@ -46,8 +48,8 @@ public class WebSecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(jwtAuthenticationFilter)
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                //.addFilter(jwtAuthenticationFilter)
+                //.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
