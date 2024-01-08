@@ -3,6 +3,7 @@ package lara.pers.ProjectM2.controller;
 import java.util.List;
 import java.util.Optional;
 
+import lara.pers.ProjectM2.controller.handlers.DbException;
 import lara.pers.ProjectM2.dto.MedSpecialCreateDTO;
 import lara.pers.ProjectM2.entity.MedicalSpeciality;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +75,12 @@ public class MedicalSpecialityController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") long id) throws Exception{
-        log.info("Borrando registro " + id + "en Tabla Medical Speciality");
-        service.delete(id);
-    }
+        try {
+            log.info("Borrando registro " + id + "en Tabla Medical Speciality");
+            service.delete(id);
+
+        }catch(Exception ex){
+            throw new DbException("Db Error Delete", ex.getMessage());
+        }
+         }
 }
