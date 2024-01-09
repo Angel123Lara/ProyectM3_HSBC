@@ -9,12 +9,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @AllArgsConstructor
@@ -33,27 +36,30 @@ public class WebSecurityConfig {
 
         return http
                 .cors()
-                .and()                
+                .and()
                 .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/**")
+                .requestMatchers(new AntPathRequestMatcher("/h2/**"),new AntPathRequestMatcher("/login/**")).permitAll()
+                //.requestMatchers().permitAll()
                 //.requestMatchers("/login","/doctors","/doctors/all","/hospitals","/hospitals/all","/MedicalSpeciality","/MedicalSpeciality/all")
-
-                .anonymous()
+                //.permitAll()
+                .requestMatchers("/**").authenticated()
                 .anyRequest()
-                .authenticated()       
+                .authenticated()
                 .and()
                 .httpBasic()
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                //.addFilter(jwtAuthenticationFilter)
-                //.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                //.sessionManagement()
+                //.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //.and()
+                .addFilter(jwtAuthenticationFilter)
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
-    /*@Bean
+    @Bean
     UserDetailsService userDetailsService (){
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 
@@ -62,12 +68,12 @@ public class WebSecurityConfig {
                 .roles("ADMIN")
                 .build());
         return manager;
-    }*/
+    }
 
     @Bean
     AuthenticationManager authManager (HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userDetailsService())
                 .passwordEncoder(passwordEncoder())
                 .and()
                 .build();
