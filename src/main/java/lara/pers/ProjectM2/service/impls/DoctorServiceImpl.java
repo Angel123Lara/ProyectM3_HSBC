@@ -10,8 +10,6 @@ import lara.pers.ProjectM2.entity.Hospital;
 import lara.pers.ProjectM2.entity.MedicalSpeciality;
 import lara.pers.ProjectM2.repository.HospitalRepository;
 import lara.pers.ProjectM2.repository.MedicalSpecialRepository;
-import lara.pers.ProjectM2.service.extraServ.DoctorExtraServ;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lara.pers.ProjectM2.dto.DoctorDTO;
@@ -31,21 +29,19 @@ public class DoctorServiceImpl implements DoctorService {
 
     private MedicalSpecialRepository MedSpRepository;
 
-    private DoctorExtraServ docExtraServ;
     @Autowired
-    public DoctorServiceImpl(DoctorMapper mapper, DoctorRepository repository, HospitalRepository hospitalRepository, MedicalSpecialRepository MedSpRepository, DoctorExtraServ doctorExtraServ){
+    public DoctorServiceImpl(DoctorMapper mapper, DoctorRepository repository, HospitalRepository hospitalRepository, MedicalSpecialRepository MedSpRepository){
         this.mapper = mapper;
         this.repository = repository;
         this.hospitalRepository = hospitalRepository;
         this.MedSpRepository = MedSpRepository;
-        this.docExtraServ = doctorExtraServ;
+
         
         log.info("Constructor doctorServiceImpl listo");
     }
 
     public List<DoctorDTO> findAll() {
         List<Doctor> doctors  = repository.findAll();
-        docExtraServ.printServ();
         log.info("metodo findAll() realizado con exito en doctorServiceImpl");
         return doctors.stream().map(mapper::toDTO).toList();
     }
